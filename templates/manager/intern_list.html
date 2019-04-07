@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Picha!{% endblock %}
+{% block title %}Interns!{% endblock %}
 
 {% block headcss %}
   <style>
@@ -14,14 +14,11 @@
 {% endblock %}
 
 {% block content %}
-         {% if user.is_authenticated %}
-
-      
-      <span class="login100-form-title p-b-53" ><a style="font-size:125%;color:red"; href="{% url 'logout' %}">logout</a></span>
+         
 
       <input id="myInput" type="text" placeholder="Search..">
 
-{% endif %}
+
  
   <div class="images row">
     <table class="table table-striped">
