@@ -13,6 +13,14 @@
       <div class="section">
         <div class="row">
           <div class="col s9"><a href="{% url 'home' %}"><h3>Intern Manager!</h3></a></div>
+                {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <p class="msg msg-{{ message.tags }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
         </div>
         <div>
 

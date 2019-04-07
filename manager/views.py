@@ -13,7 +13,7 @@ class SignUpView(FormView):
     template_name = 'manager/signup.html'
 
     def form_valid(self, form):
-        form.save(is_staff=True)
+        form.save()
         username = form.cleaned_data.get('username')
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
@@ -29,7 +29,7 @@ class LoginView(FormView):
 class InternCreateView(CreateView):
     form_class=InternForm
     template_name = 'manager/intern_form.html'
-    success_message = "The book created successfully"
+    success_message = "The intern created successfully"
     def form_valid(self,form):
         form.save()
         return redirect('/')
@@ -39,7 +39,8 @@ class InternUpdateView(SuccessMessageMixin,UpdateView):
     slug_field = 'pk'
     slug_url_kwarg = 'pk'
     form_class = InternUpdateForm
-    success_message = "The book updated successfully"
+    success_url = '/'
+    success_message = "The intern updated successfully"
 
 class InternsListView(ListView):
 	queryset = Intern.objects.all().order_by('-date_of_join')
