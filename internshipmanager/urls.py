@@ -1,18 +1,3 @@
-"""internshipmanager URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path,include
 from manager.views import *
@@ -29,7 +14,10 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name="login"),
     path('signup/',SignUpView.as_view(), name="signup"),
     path('', staff_member_required(InternsListView.as_view(),login_url='login'), name="home"),
-    path('intern/<int:pk>', staff_member_required(InternDetailView.as_view(),login_url='login'), name='intern-detail'),
+    path('interndetails/<int:pk>', staff_member_required(InternDetailView.as_view(),login_url='login'), name='intern-detail'),
+    path('interncreate/', staff_member_required(InternCreateView.as_view(),login_url='login'), name='intern-create'),
+    path('internupdate/<int:pk>', staff_member_required(InternUpdateView.as_view(),login_url='login'), name='intern-update'),
+    path('interndelete/<int:pk>', staff_member_required(InternDeleteView.as_view(),login_url='login'), name='intern-delete'),
     path('accounts/logout/', LogoutView.as_view(template_name="manager/logout.html"), name='logout'),
 
 ]

@@ -25,7 +25,7 @@
     <table class="table table-striped">
   <thead>
     <tr>
-      
+      <th><b>id</b></th>    
       <th><b>Name</b></th>
       <th><b>Phone number</b></th>
       <th><b>email</b></th>
@@ -37,15 +37,18 @@
   <tbody>
     {% for intern in interns %}
     <tr>
+
+      <td><a href='interndetails/{{ intern.id }}'>{{ intern.id }}</a></td>
       <td>{{ intern.fullname }}</td>
       <td>{{ intern.phone }}</td>
       <td>{{ intern.email }}</td>
       <td>{{ intern.status }}</td>
-
+      <td><a href='internupdate/{{ intern.id }}'>Edit</a></td>
+      <td><a href='interndelete/{{ intern.id }}'>Delete</a></td>
     </tr>
     {% endfor %}
     <tr>
-     
+      <td colspan=6><a href="{% url 'intern-create' %}">Add new intern</a></td>
     </tr>
   </tbody>
 </table>
@@ -53,7 +56,31 @@
 
     
   </div>
-
+  <div class="row">
+    <div class="col s12">
+      {% if is_paginated %}
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="waves-effect">
+              <a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}"><i class="mdi-navigation-chevron-left"></i></a>
+            </li>
+          {% else %}
+            <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
+          {% endif %}
+          <li class="active">
+          <a href="#!">{{ page_obj.number }}</a>
+          </li>
+          {% if page_obj.has_next %}
+            <li class="waves-effect">
+              <a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}"><i class="mdi-navigation-chevron-right"></i></a>
+            </li>
+          {% else %}
+            <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
+          {% endif %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block extrabody %}

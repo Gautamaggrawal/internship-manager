@@ -5,16 +5,17 @@
     <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css"  media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>{% block title %}Picha!{% endblock %}</title>
+    <title>{% block title %}InternManager!{% endblock %}</title>
     {% block headcss %}{% endblock %}
   </head>
   <body>
     <div class="container">
       <div class="section">
         <div class="row">
-          <div class="col s9"><a href="{% url 'home' %}"><h3>Picha!</h3></a></div>
+          <div class="col s9"><a href="{% url 'home' %}"><h3>Intern Manager!</h3></a></div>
         </div>
         <div>
+
 
         {% block content %}{% endblock %}
       </div>
