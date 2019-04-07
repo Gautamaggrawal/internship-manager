@@ -19,6 +19,7 @@ urlpatterns = [
     path('internupdate/<int:pk>', login_required(InternUpdateView.as_view(),login_url='login'), name='intern-update'),
     path('interndelete/<int:pk>', login_required(InternDeleteView.as_view(),login_url='login'), name='intern-delete'),
     path('accounts/logout/', LogoutView.as_view(template_name="manager/logout.html"), name='logout'),
+    path('getresults/', Dynamic_Search, name='searches'),
 
 ]
 

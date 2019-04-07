@@ -1,12 +1,13 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.views.generic.edit import FormView
 from django.views.generic import *
 from .models import *
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .forms import *
+from django.db.models import Q
 
 class SignUpView(FormView):
     form_class = UserCreationForm
@@ -63,3 +64,19 @@ class InternDeleteView(SuccessMessageMixin,DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(InternDeleteView, self).delete(request, *args, **kwargs)
+
+
+
+def Dynamic_Search(request):
+
+    if request.method == "GET":
+        search_text = request.GET['search_text']
+        if search_text is not None and search_text != u"":
+            search_text = request.GET['search_text']
+            statuss = Intern.objects.filter(Q(fullname__contains = search_text)|Q(email__contains=search_text))
+        else:
+            statuss = []
+
+        return render(request, 'manager/intern_list.html', {'statuss':statuss})
+
+

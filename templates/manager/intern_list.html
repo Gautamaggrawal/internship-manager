@@ -19,6 +19,8 @@
       
       <span class="login100-form-title p-b-53" ><a style="font-size:125%;color:red"; href="{% url 'logout' %}">logout</a></span>
 
+      <input id="myInput" type="text" placeholder="Search..">
+
 {% endif %}
  
   <div class="images row">
@@ -34,7 +36,7 @@
       <th colspan=2><b>Action</b></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id='myTable'>
     {% for intern in interns %}
     <tr>
 
@@ -84,9 +86,16 @@
 {% endblock %}
 
 {% block extrabody %}
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.modal-trigger').leanModal();
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
-  </script>
+  });
+});
+</script>
+
 {% endblock %}
