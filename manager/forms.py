@@ -18,7 +18,7 @@ class InternForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(InternForm, self).__init__(*args, **kwargs)
-        self.fields['admin'].initial=User.objects.filter(is_staff=True).exclude(is_superuser=False)[0]
+        self.fields['admin'].initial=User.objects.filter(is_active=True).exclude(is_superuser=True,is_staff=True)[0]
 
 
     # def clean_phone(self):
@@ -36,6 +36,6 @@ class InternUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(InternUpdateForm, self).__init__(*args, **kwargs)
-        self.fields['admin'].initial=User.objects.filter(is_staff=True).exclude(is_superuser=False)[0]
+        self.fields['admin'].initial=User.objects.filter(is_active=True).exclude(is_superuser=True,is_staff=True)[0]
 
 
