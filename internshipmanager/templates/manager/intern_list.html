@@ -37,13 +37,13 @@
     {% for intern in interns %}
     <tr>
 
-      <td><a href='interndetails/{{ intern.id }}'>{{ intern.id }}</a></td>
+      <td><a href='/internmanager/interndetails/{{ intern.id }}'>{{ intern.id }}</a></td>
       <td>{{ intern.fullname }}</td>
       <td>{{ intern.phone }}</td>
       <td>{{ intern.email }}</td>
       <td>{{ intern.status }}</td>
-      <td><a href='internupdate/{{ intern.id }}'>Edit</a></td>
-      <td><a href='interndelete/{{ intern.id }}'>Delete</a></td>
+      <td><a href='/internmanager/internupdate/{{ intern.id }}'>Edit</a></td>
+      <td><a href='/internmanager/interndelete/{{ intern.id }}'>Delete</a></td>
     </tr>
     {% endfor %}
     <tr>
