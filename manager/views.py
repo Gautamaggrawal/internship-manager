@@ -19,13 +19,12 @@ class SignUpView(FormView):
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
         login(self.request, user)
-        return redirect('/')
+        return redirect('/internmanager/list/')
 
-class LoginView(FormView):
+class YoView(FormView):
     form_class = AuthenticationForm
-    template_name = 'manager/login.html'
-    success_url=''
-
+    template_name = 'registration/login.html'
+    success_url='/internmanager/list/'
 
 class InternCreateView(CreateView):
     form_class=InternForm
@@ -33,14 +32,14 @@ class InternCreateView(CreateView):
     success_message = "The intern created successfully"
     def form_valid(self,form):
         form.save()
-        return redirect('/')
+        return redirect('/internmanager/list/')
 
 class InternUpdateView(SuccessMessageMixin,UpdateView):
     model=Intern
     slug_field = 'pk'
     slug_url_kwarg = 'pk'
     form_class = InternUpdateForm
-    success_url = '/'
+    success_url = '/internmanager/list/'
     success_message = "The intern updated successfully"
 
 class InternsListView(ListView):
@@ -59,7 +58,7 @@ class InternDeleteView(SuccessMessageMixin,DeleteView):
     slug_field = 'pk'
     slug_url_kwarg = 'pk'
     success_message = "The Intern deleted successfully "
-    success_url = '/'
+    success_url = '/internmanager/list/'
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)

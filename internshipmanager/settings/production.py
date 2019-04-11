@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wxx9m8^^bs%k)zrag9^(r2k!l!k5zznb*kt=gfs4pw=8t9ne!9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+'internshipmanager.herokuapp.com'
+]
 
 
 # Application definition
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'manager',
+    'intern',
 ]
 
 
@@ -49,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'internshipmanager.urls'
@@ -122,24 +126,41 @@ USE_TZ = True
 
 import django_heroku
 django_heroku.settings(locals())
-# static files settings
-STATIC_URL = '/static/'
-# location where you will store your static files like bootstrap
-STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, "static"),
-]
-# location where django collect all static files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-# STATIC_ROOT = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "live-static", "static-root")
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+#STATIC_ROOT = "/home/cfedeploy/webapps/cfehome_static_root/"
+
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "live-static", "media-root")
+
+
+
+# # static files settings
 # STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-LOGIN_REDIRECT_URL='/'
+# # location where you will store your static files like bootstrap
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+# ]
+# # location where django collect all static files
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+
+# # Static files (CSS, JavaScript, Images)
+# # https://docs.djangoproject.com/en/1.8/howto/static-files/
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "static"),
+# )
+# # STATIC_ROOT = '/static/'
+# # STATIC_URL = '/static/'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+LOGIN_REDIRECT_URL='/internmanager/list/'
 

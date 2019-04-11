@@ -2,8 +2,7 @@ from django import forms
 from .models import *
 import re
 from django.contrib.auth.models import User
-# from django import forms
-
+from django.contrib.auth.forms import AuthenticationForm
 
 
 
@@ -39,3 +38,8 @@ class InternUpdateForm(forms.ModelForm):
         self.fields['admin'].initial=User.objects.filter(is_active=True).exclude(is_superuser=True,is_staff=True)[0]
 
 
+class CustomAuthenticationForm(AuthenticationForm):
+    def confirm_login_allowed(self, user):
+        print(user)
+        if user.is_superuser==True:
+            raise forms.ValidationError('Super User cant login from here', code='invalid_login')
