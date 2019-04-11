@@ -3,7 +3,7 @@ from .models import *
 import re
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model,login
 
 
 
@@ -21,18 +21,22 @@ class InternSignUpForm(UserCreationForm):
             user.save()
         return user
 
-class CustomAuthenticationForm(forms.Form):
-	username = forms.CharField(max_length=254)
-	password = forms.CharField(label="Password", widget=forms.PasswordInput)
-	def clean(self):
-		username = self.cleaned_data.get('username')
-		password = self.cleaned_data.get('password')
-		print(username,password)
-		if username and password:
-			user_cache=User.objects.filter(username=username,password=password).exists()
-			print(user_cache)
-			if user_cache is False:
-				raise forms.ValidationError("incorrect cred")
-			# else:
-			# 	self.confirm_login_allowed(	user_cache)
-		return self.cleaned_data
+# class CustomAuthenticationForm(forms.Form):
+# 	username = forms.CharField(max_length=254)
+# 	password = forms.CharField(label="Password", widget=forms.PasswordInput)
+# 	def clean(self):
+# 		username = self.cleaned_data.get('username')
+# 		password = self.cleaned_data.get('password')
+# 		print(username,password)
+# 		if username and password:
+# 			print(User.objects.filter(username=username))
+# 			print(authenticate(username=username,password=password))	
+
+# 			user_cache=User.objects.filter(username=username,password=password).exists()
+# 			print(user_cache)
+# 			if user_cache ==False:
+# 				raise forms.ValidationError("incorrect cred")
+# 			else:
+# 				login(user_cache[0])
+# 			# 	self.confirm_login_allowed(	user_cache)
+# 		return self.cleaned_data

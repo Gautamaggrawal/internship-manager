@@ -7,6 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>{% block title %}InternManager!{% endblock %}</title>
     {% block headcss %}{% endblock %}
+    <style type="text/css">
+      #btnSearch,
+#btnClear{
+    display: inline-block;
+    vertical-align: top;
+}
+
+    </style>
   </head>
   <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -37,7 +45,7 @@
       <div class="section">
         <div class="row">
           
-                {% if messages %}
+        {% if messages %}
         <div class="messages">
           {% for message in messages %}
             <p class="msg msg-{{ message.tags }}">{{ message }}</p>
